@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout
+  title="Family Portal"
+  description="Family portal for Tiverton Park Manor residents and families."
+>
+  <section class="bg-tpm-navy py-14 text-white">
+    <div class="mx-auto max-w-6xl px-4">
+      <h1 class="font-serif text-4xl">Family Portal</h1>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-2xl px-4 py-14 text-center">
+    <p class="text-lg text-slate-600">
+      The family portal is being prepared so residents and families can stay connected to updates
+      from {site.name}. For immediate questions, please contact our team.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <a href="/contact" class="rounded-lg bg-tpm-teal px-6 py-3 font-semibold text-white hover:bg-tpm-navy">
+        Contact us
+      </a>
+      <a
+        href={`mailto:${site.email}`}
+        class="rounded-lg border border-tpm-navy px-6 py-3 font-semibold text-tpm-navy hover:bg-slate-50"
+      >
+        Email {site.email}
+      </a>
+    </div>
+    <p class="mt-10 text-sm text-slate-500">
+      When an external login is available, a sign-in link will appear here.
+    </p>
+  </section>
+</BaseLayout>

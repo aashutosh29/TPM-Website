@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --color-tpm-navy: #1a365d;
+  --color-tpm-navy-dark: #0f2744;
+  --color-tpm-teal: #2c7a7b;
+  --color-tpm-teal-light: #4fd1c5;
+  --color-tpm-cream: #faf8f5;
+  --color-tpm-gold: #c9a227;
+  --font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Libre Baskerville", ui-serif, Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-tpm-cream text-slate-800 antialiased;
+}
+
+.prose-tpm h2 {
+  @apply font-serif text-3xl text-tpm-navy md:text-4xl;
+}
+
+.prose-tpm h3 {
+  @apply font-serif text-xl text-tpm-teal;
+}

@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const suites = [
+  {
+    name: "Couple's Suite",
+    tag: 'A suite made for two',
+    description:
+      "Our Couple's Suites are thoughtfully designed for partners who wish to live together in comfort and connection. The space supports shared living while respecting individual needs.",
+  },
+  {
+    name: '2-Room Suite',
+    tag: 'Privacy and flexibility',
+    description:
+      'Our 2-Room Suites offer an ideal setup for individuals or couples who value both privacy and flexibility. With two separate rooms, this suite creates a comfortable, home-like atmosphere with space to relax, host visitors, or enjoy quiet moments.',
+  },
+  {
+    name: 'Private Suite',
+    tag: 'Independent living',
+    description:
+      'The Private Suite is designed for residents who value a quiet, independent space to call their own. Enjoy privacy and comfort in a suite that feels like home.',
+  },
+  {
+    name: 'Standard Single',
+    tag: 'Comfort at its core',
+    description:
+      'Our Standard Single Rooms are thoughtfully designed for individuals who value privacy, comfort, and independence. The space is bright, cozy, and part of a warm, welcoming residence.',
+  },
+  {
+    name: 'Studio',
+    tag: 'Cozy and convenient',
+    description:
+      'Our Studio Suites are perfect for solo residents who prefer a simple, all-in-one space. Everything you need is within easy reach in a warm, thoughtfully designed layout.',
+  },
+];
+---
+
+<BaseLayout
+  title="Living Options"
+  description="Suite types at Tiverton Park Manor — singles, studios, private and couple layouts in Tiverton, ON."
+>
+  <section class="bg-tpm-navy py-14 text-white">
+    <div class="mx-auto max-w-6xl px-4">
+      <h1 class="font-serif text-4xl">Living Options</h1>
+      <p class="mt-4 max-w-3xl text-lg text-slate-200">
+        Choose from a range of thoughtfully designed suites including cozy singles, private studios,
+        and spacious two-room layouts. Each offers comfort, convenience, and a true sense of home.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-14">
+    <div class="grid gap-8">
+      {
+        suites.map((suite) => (
+          <article class="flex flex-col gap-4 rounded-xl border border-slate-200 bg-white p-8 shadow-sm md:flex-row md:items-start">
+            <div class="flex-1">
+              <p class="text-sm font-semibold uppercase tracking-wide text-tpm-teal">{suite.tag}</p>
+              <h2 class="mt-1 font-serif text-2xl text-tpm-navy">{suite.name}</h2>
+              <p class="mt-3 text-slate-600">{suite.description}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-slate-50 py-14 text-center">
+    <h2 class="font-serif text-2xl text-tpm-navy">Discover the right living option for you</h2>
+    <p class="mt-2 text-slate-600">Reach out by phone or email for any inquiries.</p>
+    <p class="mt-6">
+      <a href={`tel:${site.phoneTel}`} class="text-2xl font-bold text-tpm-teal">{site.phone}</a>
+    </p>
+    <p class="mt-2">
+      <a href={`mailto:${site.email}`} class="font-semibold text-tpm-navy hover:underline">Email us</a>
+    </p>
+  </section>
+</BaseLayout>

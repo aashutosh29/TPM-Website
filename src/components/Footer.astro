@@ -1,0 +1,55 @@
+---
+import { site, navLinks } from '../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-auto border-t border-slate-200 bg-tpm-navy text-white">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 py-12 md:grid-cols-3">
+    <div>
+      <h2 class="font-serif text-xl font-bold">{site.name}</h2>
+      <p class="mt-2 text-sm text-slate-300">{site.tagline}</p>
+      <a
+        href="/schedule-a-tour"
+        class="mt-4 inline-block rounded-lg bg-tpm-teal px-4 py-2 text-sm font-semibold hover:bg-tpm-teal-light hover:text-tpm-navy"
+      >
+        Schedule a Tour
+      </a>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-semibold uppercase tracking-wide text-tpm-teal-light">Contact</h3>
+      <ul class="mt-3 space-y-2 text-sm">
+        <li>
+          <a href={`tel:${site.phoneTel}`} class="hover:text-tpm-teal-light">{site.phone}</a>
+        </li>
+        <li>
+          <a href={`mailto:${site.email}`} class="hover:text-tpm-teal-light">{site.email}</a>
+        </li>
+        <li>{site.address.formatted}</li>
+      </ul>
+    </div>
+
+    <div>
+      <h3 class="text-sm font-semibold uppercase tracking-wide text-tpm-teal-light">Explore</h3>
+      <ul class="mt-3 grid grid-cols-2 gap-x-4 gap-y-1 text-sm">
+        {
+          navLinks
+            .filter((l) => l.href !== '/')
+            .map((link) => (
+              <li>
+                <a href={link.href} class="text-slate-300 hover:text-white">
+                  {link.label}
+                </a>
+              </li>
+            ))
+        }
+        <li>
+          <a href="/family-portal" class="text-slate-300 hover:text-white">Family Portal</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-white/10 px-4 py-4 text-center text-xs text-slate-400">
+    © {year} {site.name}. All rights reserved.
+  </div>
+</footer>

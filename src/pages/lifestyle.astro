@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const highlights = [
+  {
+    title: '5-star dining',
+    text: 'Our talented chefs prepare fresh, nutritious meals daily, with options tailored to dietary needs. Join friends in the dining room and savor every bite while our dining team takes care of the rest.',
+  },
+  {
+    title: 'Therapy services',
+    text: 'On-site therapy and wellness support help residents stay mobile, independent, and confident. Our team coordinates services with families and healthcare providers right here at Tiverton Park Manor.',
+  },
+  {
+    title: 'Engaging activities',
+    text: 'A full calendar of social, recreational, and fitness programming keeps days interesting. From music and crafts to outings and fitness, there is always something to look forward to at our residence.',
+  },
+  {
+    title: 'Quiet and relaxing',
+    text: 'Spacious common areas and a peaceful lakeshore setting offer room to unwind. Whether you prefer lively conversation or a quiet corner with a book, you will find your rhythm here.',
+  },
+];
+---
+
+<BaseLayout
+  title="Lifestyle"
+  description="Dining, activities, therapy, and wellness at Tiverton Park Manor on Lake Huron."
+>
+  <section class="bg-tpm-navy py-14 text-white">
+    <div class="mx-auto max-w-6xl px-4">
+      <h1 class="font-serif text-4xl">Lifestyle</h1>
+      <p class="mt-4 max-w-3xl text-lg text-slate-200">
+        Reach new dimensions of health and wellness in a single, lakeside retirement residence.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-14">
+    <div class="grid gap-8 sm:grid-cols-2">
+      {
+        highlights.map((h) => (
+          <article class="rounded-xl border border-slate-200 bg-white p-6">
+            <h2 class="font-serif text-xl text-tpm-teal">{h.title}</h2>
+            <p class="mt-3 text-slate-600">{h.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-4 py-8 text-center prose-tpm">
+    <h2>Stay active, connect with others, and live life to the fullest</h2>
+    <p class="mt-4 text-slate-600">
+      There is no shortage of recreational, social, and wellness opportunities at Tiverton Park Manor.
+      With so many options under one roof, you may find there are not enough hours in the day.
+    </p>
+  </section>
+
+  <section class="bg-slate-50 py-14">
+    <div class="mx-auto max-w-3xl px-4">
+      <h2 class="font-serif text-2xl text-tpm-navy">Enjoy amazing food and great service</h2>
+      <p class="mt-4 text-slate-600">
+        Our talented chefs provide fresh, nutritional meals that can be catered to meet specific dietary
+        needs. With a dining team that loves to serve and assist, you can relax, enjoy time with your
+        friends, and savor every delicious bite.
+      </p>
+      <h2 class="mt-10 font-serif text-2xl text-tpm-navy">Count on us to help keep you healthy and safe</h2>
+      <p class="mt-4 text-slate-600">
+        Experience peace of mind knowing you are in good hands. From emergency response plans and
+        thoughtfully designed suites and common areas, to wellness programming and daily encouragement,
+        our team is committed to your health and happiness.
+      </p>
+    </div>
+  </section>
+
+  <blockquote class="mx-auto max-w-2xl border-l-4 border-tpm-teal px-4 py-8 italic text-slate-700">
+    “I am so very pleased with the staff, surroundings, programs and activities. My dad has never been
+    more content in his entire life.”
+    <footer class="mt-3 not-italic text-sm text-slate-500">— John McConnor, daughter of resident</footer>
+  </blockquote>
+</BaseLayout>

@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Team"
+  description="Meet the executive leadership team at Tiverton Park Manor."
+>
+  <section class="bg-tpm-navy py-14 text-white">
+    <div class="mx-auto max-w-6xl px-4">
+      <h1 class="font-serif text-4xl">Our Team</h1>
+      <p class="mt-4 text-lg text-slate-200">Executive Leadership Team</p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-4xl px-4 py-14">
+    <div class="grid gap-10 md:grid-cols-2">
+      <article class="rounded-xl bg-white p-8 text-center shadow-md ring-1 ring-slate-200">
+        <div class="mx-auto flex h-32 w-32 items-center justify-center rounded-full bg-tpm-navy/10 text-3xl font-serif text-tpm-navy">
+          DH
+        </div>
+        <h2 class="mt-6 text-xl font-semibold text-tpm-navy">Duncan Hamann</h2>
+        <p class="text-tpm-teal">Owner and General Manager</p>
+      </article>
+      <article class="rounded-xl bg-white p-8 text-center shadow-md ring-1 ring-slate-200">
+        <div class="mx-auto flex h-32 w-32 items-center justify-center rounded-full bg-tpm-navy/10 text-3xl font-serif text-tpm-navy">
+          LF
+        </div>
+        <h2 class="mt-6 text-xl font-semibold text-tpm-navy">Lori Fredericks</h2>
+        <p class="text-tpm-teal">Owner and Director of Care</p>
+      </article>
+    </div>
+    <p class="mt-12 text-center text-slate-600">
+      Experience the ideal destination where you can relax, feel secure, and enjoy every moment to the
+      fullest.
+    </p>
+  </section>
+</BaseLayout>

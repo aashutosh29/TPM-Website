@@ -1,0 +1,28 @@
+---
+import { site } from '../data/site';
+---
+
+<section class="bg-tpm-navy-dark py-10 text-white" aria-label="Contact information">
+  <div class="mx-auto max-w-6xl px-4">
+    <h2 class="text-center font-serif text-2xl">We can't wait to help you settle into your new home.</h2>
+    <p class="mt-2 text-center text-slate-300">Reach us by phone or email anytime.</p>
+    <div class="mt-8 grid gap-6 text-center md:grid-cols-3">
+      <div>
+        <p class="text-sm uppercase tracking-wide text-tpm-teal-light">Phone</p>
+        <a href={`tel:${site.phoneTel}`} class="mt-1 block text-xl font-semibold hover:text-tpm-teal-light">
+          {site.phone}
+        </a>
+      </div>
+      <div>
+        <p class="text-sm uppercase tracking-wide text-tpm-teal-light">Email</p>
+        <a href={`mailto:${site.email}`} class="mt-1 block text-lg hover:text-tpm-teal-light">
+          {site.email}
+        </a>
+      </div>
+      <div>
+        <p class="text-sm uppercase tracking-wide text-tpm-teal-light">Visit</p>
+        <p class="mt-1 text-lg">{site.address.formatted}</p>
+      </div>
+    </div>
+  </div>
+</section>

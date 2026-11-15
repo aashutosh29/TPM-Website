@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const pillars = [
+  {
+    title: 'Our mission',
+    text: 'Our mission is to foster a safe, compassionate environment where our team flourishes and residents discover joy through meaningful experiences and lasting friendships.',
+  },
+  {
+    title: 'Our purpose',
+    text: 'Through enriching programs, we offer residents meaningful opportunities to pursue hobbies, explore their passions, and build deeper connections.',
+  },
+  {
+    title: 'Our commitment',
+    text: 'We create personalized care plans and coordinate additional services to ensure every need is met. We also provide nutritious meals and daily fitness to support overall well-being.',
+  },
+];
+
+const differentiators = [
+  {
+    title: 'Communication',
+    text: 'We prioritize open, respectful communication with residents and families to ensure clarity, comfort, and trust in every aspect of care. Your voice matters, and we are always here to listen.',
+  },
+  {
+    title: 'Connection',
+    text: 'We believe in the power of connection. By encouraging social engagement, teamwork, and shared experiences, we help residents build meaningful relationships and live with a strong sense of community.',
+  },
+  {
+    title: 'Dining',
+    text: 'We adapt to your needs with flexible dining options, personalized services, and responsive care—ensuring comfort, dignity, and satisfaction every step of the way.',
+  },
+  {
+    title: 'Compassionate care',
+    text: 'We honour every individual in our residence by providing attentive, personalized care and building meaningful, long-term relationships based on trust and dignity.',
+  },
+];
+---
+
+<BaseLayout
+  title="About"
+  description={`Learn about ${site.name} — our mission, purpose, and commitment to residents in Tiverton.`}
+>
+  <section class="bg-tpm-navy py-14 text-white">
+    <div class="mx-auto max-w-6xl px-4">
+      <h1 class="font-serif text-4xl">About Us</h1>
+      <p class="mt-4 max-w-3xl text-lg text-slate-200">
+        Cherishing moments, empowering lives, living vibrantly — at {site.name}, every aspect is
+        carefully crafted to support a life of fulfillment, enriched with new possibilities, deeper
+        connections, respect, and happiness.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-14">
+    <div class="grid gap-8 md:grid-cols-3">
+      {
+        pillars.map((p) => (
+          <article class="rounded-xl border border-slate-200 p-6">
+            <h2 class="font-serif text-xl text-tpm-teal">{p.title}</h2>
+            <p class="mt-3 text-slate-600">{p.text}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="bg-slate-50 py-14">
+    <div class="mx-auto max-w-6xl px-4">
+      <h2 class="text-center font-serif text-3xl text-tpm-navy">What makes us different</h2>
+      <p class="mt-2 text-center text-slate-600">We have something for everyone — in one welcoming residence.</p>
+      <div class="mt-10 grid gap-6 md:grid-cols-2">
+        {
+          differentiators.map((d, i) => (
+            <article class="rounded-xl bg-white p-6 shadow-sm">
+              <span class="text-sm font-bold text-tpm-gold">0{i + 1}</span>
+              <h3 class="mt-1 text-lg font-semibold text-tpm-navy">{d.title}</h3>
+              <p class="mt-2 text-slate-600">{d.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-14 text-center">
+    <h2 class="font-serif text-2xl text-tpm-navy">Discover the space that feels like home</h2>
+    <p class="mt-2 text-slate-600">We are just a call or email away to answer your questions.</p>
+    <p class="mt-6">
+      <a href={`tel:${site.phoneTel}`} class="text-2xl font-bold text-tpm-teal">{site.phone}</a>
+    </p>
+    <p class="mt-2">
+      <a href={`mailto:${site.email}`} class="text-tpm-navy hover:underline">{site.email}</a>
+    </p>
+  </section>
+</BaseLayout>
