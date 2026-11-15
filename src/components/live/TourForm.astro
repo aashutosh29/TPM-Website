@@ -1,0 +1,108 @@
+---
+import { scheduleTourPage } from '../../data/pages/schedule-a-tour';
+---
+
+<form id="tour-form" class="wpcf7-form form-schedule mx-auto max-w-xl space-y-4" novalidate>
+  <p>
+    <label>Name *</label>
+    <input name="name" type="text" required placeholder="Name *" autocomplete="name" />
+  </p>
+  <p>
+    <label>Email *</label>
+    <input name="email" type="email" required placeholder="Email *" autocomplete="email" />
+  </p>
+  <p>
+    <label>Phone Number *</label>
+    <input name="phone" type="tel" required placeholder="Phone Number *" autocomplete="tel" />
+  </p>
+  <p>
+    <label>Preferred Date *</label>
+    <input name="preferred_date" type="date" required />
+  </p>
+  <p>
+    <label>Preferred Time *</label>
+    <select name="select_time" required class="form-time">
+      <option value="">Preferred Time *</option>
+      {scheduleTourPage.timeOptions.map((t) => (
+        <option value={t}>{t}</option>
+      ))}
+    </select>
+  </p>
+  <fieldset>
+    <legend class="mb-2 text-sm font-medium">Touring with</legend>
+    {scheduleTourPage.audienceOptions.map((opt) => (
+      <label class="mb-1 mr-4 inline-flex items-center gap-2 text-sm">
+        <input type="checkbox" name="audience" value={opt} />
+        {opt}
+      </label>
+    ))}
+  </fieldset>
+  <p>
+    <label>I am interested in *</label>
+    <select name="living_options" required>
+      <option value="">I am interested in *</option>
+      {scheduleTourPage.interestOptions.map((opt) => (
+        <option value={opt.value}>{opt.label}</option>
+      ))}
+    </select>
+  </p>
+  <p>
+    <label>Additional Comments</label>
+    <textarea name="message" rows="6" placeholder="Additional Comments"></textarea>
+  </p>
+  <button type="submit" class="eldcare-btn">Send</button>
+  <p class="form-feedback hidden rounded-lg p-3 text-sm" role="status"></p>
+</form>
+
+<script>
+  const form = document.getElementById('tour-form');
+  if (!form) throw new Error('tour-form missing');
+  const feedback = form.querySelector('.form-feedback');
+  const btn = form.querySelector('button[type="submit"]');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    feedback?.classList.add('hidden');
+    if (btn) btn.disabled = true;
+
+    const fd = new FormData(form);
+    const audience = fd.getAll('audience').join(', ');
+    const payload = {
+      name: String(fd.get('name') ?? '').trim(),
+      email: String(fd.get('email') ?? '').trim(),
+      phone: String(fd.get('phone') ?? '').trim(),
+      preferred_date: String(fd.get('preferred_date') ?? '').trim(),
+      message: [
+        `Preferred time: ${fd.get('select_time')}`,
+        `Touring with: ${audience}`,
+        `Interest (live value): ${fd.get('living_options')}`,
+        String(fd.get('message') ?? ''),
+      ]
+        .filter(Boolean)
+        .join('\n'),
+    };
+
+    try {
+      const res = await fetch('/api/tour/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const json = await res.json();
+      if (!res.ok || !json.ok) throw new Error(json.message ?? 'Failed');
+      form.reset();
+      show(json.message ?? 'Thank you. We will contact you to confirm your tour.', true);
+    } catch (err) {
+      show(err instanceof Error ? err.message : 'Please call 519-368-8800.', false);
+    } finally {
+      if (btn) btn.disabled = false;
+    }
+  });
+
+  function show(text, ok) {
+    if (!feedback) return;
+    feedback.textContent = text;
+    feedback.classList.remove('hidden', 'bg-green-50', 'text-green-800', 'bg-red-50', 'text-red-800');
+    feedback.classList.add(ok ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800');
+  }
+</script>

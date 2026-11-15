@@ -1,61 +1,20 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import LeadForm from '../components/LeadForm.astro';
-import ContactStrip from '../components/ContactStrip.astro';
-import { site } from '../data/site';
-
-const fields = [
-  { name: 'name', label: 'Your name', type: 'text' as const },
-  { name: 'email', label: 'Email', type: 'email' as const },
-  { name: 'phone', label: 'Phone', type: 'tel' as const, required: false },
-  { name: 'message', label: 'Message', type: 'textarea' as const, rows: 5 },
-];
+import PageHero from '../components/live/PageHero.astro';
+import { contactPage } from '../data/pages/contact';
 ---
 
-<BaseLayout
-  title="Contact"
-  description={`Contact ${site.name} — phone, email, or send a message to our team in Tiverton.`}
-  showContactStrip={false}
->
-  <section class="bg-tpm-navy py-14 text-white">
-    <div class="mx-auto max-w-6xl px-4">
-      <h1 class="font-serif text-4xl">Contact</h1>
-      <p class="mt-4 max-w-2xl text-slate-200">
-        Feel free to get in touch. We are honored to be part of our residents' and families' lives,
-        supporting them on their journey and making a positive impact on their well-being.
+<BaseLayout title={contactPage.metaTitle}>
+  <PageHero title={contactPage.h1} />
+  <section class="eldcare-section grid gap-10 lg:grid-cols-2">
+    <div>
+      <h2 class="text-2xl font-bold">{contactPage.heading}</h2>
+      <p class="mt-4 text-tpm-muted">{contactPage.intro}</p>
+    </div>
+    <div class="wpcf7-not-found">
+      <p>
+        <strong>Error:</strong> Contact form not found.
       </p>
     </div>
   </section>
-
-  <section class="mx-auto grid max-w-6xl gap-12 px-4 py-14 lg:grid-cols-2">
-    <div>
-      <h2 class="font-serif text-2xl text-tpm-navy">Send a message</h2>
-      <LeadForm
-        formId="contact-form"
-        endpoint="/api/contact"
-        fields={fields}
-        submitLabel="Send message"
-        intro="We typically respond within one business day."
-      />
-    </div>
-    <div class="rounded-xl bg-slate-50 p-8">
-      <h2 class="font-serif text-xl text-tpm-navy">Visit or call</h2>
-      <ul class="mt-6 space-y-4 text-slate-700">
-        <li>
-          <strong class="text-tpm-teal">Phone</strong><br />
-          <a href={`tel:${site.phoneTel}`} class="text-lg hover:underline">{site.phone}</a>
-        </li>
-        <li>
-          <strong class="text-tpm-teal">Email</strong><br />
-          <a href={`mailto:${site.email}`} class="hover:underline">{site.email}</a>
-        </li>
-        <li>
-          <strong class="text-tpm-teal">Address</strong><br />
-          {site.address.formatted}
-        </li>
-      </ul>
-    </div>
-  </section>
-
-  <ContactStrip />
 </BaseLayout>

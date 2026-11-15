@@ -1,56 +1,23 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import LeadForm from '../components/LeadForm.astro';
-import { site } from '../data/site';
-
-const fields = [
-  { name: 'name', label: 'Your name', type: 'text' as const },
-  { name: 'email', label: 'Email', type: 'email' as const },
-  { name: 'phone', label: 'Phone', type: 'tel' as const },
-  { name: 'preferred_date', label: 'Preferred tour date', type: 'date' as const },
-  {
-    name: 'message',
-    label: 'Questions or notes',
-    type: 'textarea' as const,
-    rows: 4,
-    required: false,
-  },
-];
+import PageHero from '../components/live/PageHero.astro';
+import TourForm from '../components/live/TourForm.astro';
+import { scheduleTourPage } from '../data/pages/schedule-a-tour';
 ---
 
-<BaseLayout
-  title="Schedule a Tour"
-  description="Book a tour of Tiverton Park Manor and discover the living option that fits you best."
->
-  <section class="bg-tpm-navy py-14 text-white">
-    <div class="mx-auto max-w-6xl px-4">
-      <h1 class="font-serif text-4xl">Schedule a Tour</h1>
-      <p class="mt-4 max-w-2xl text-slate-200">
-        Book a tour to discover the plan that best fits your lifestyle. The date you choose is a
-        request — we will contact you by phone or email to confirm. Thank you.
-      </p>
+<BaseLayout title={scheduleTourPage.metaTitle}>
+  <PageHero title={scheduleTourPage.h1} breadcrumb="Schedule A Tour" />
+  <section class="eldcare-section grid gap-10 lg:grid-cols-2">
+    <div>
+      <h2 class="text-3xl font-bold">{scheduleTourPage.heading}</h2>
+      <p class="mt-4 text-tpm-muted">{scheduleTourPage.intro}</p>
+      <img
+        src={scheduleTourPage.heroImage}
+        alt=""
+        class="mt-6 rounded-2xl object-cover shadow-md"
+        loading="lazy"
+      />
     </div>
-  </section>
-
-  <section class="mx-auto max-w-6xl px-4 py-14">
-  <div class="grid gap-12 lg:grid-cols-2">
-    <LeadForm
-      formId="tour-form"
-      endpoint="/api/tour"
-      fields={fields}
-      submitLabel="Request a tour"
-    />
-    <div class="rounded-xl bg-slate-50 p-8 text-slate-700">
-      <h2 class="font-serif text-xl text-tpm-navy">Prefer to talk now?</h2>
-      <p class="mt-4">
-        Call <a href={`tel:${site.phoneTel}`} class="font-semibold text-tpm-teal">{site.phone}</a>
-        or email
-        <a href={`mailto:${site.email}`} class="font-semibold text-tpm-teal hover:underline">
-          {site.email}
-        </a>.
-      </p>
-      <p class="mt-4">{site.address.formatted}</p>
-    </div>
-  </div>
+    <TourForm />
   </section>
 </BaseLayout>

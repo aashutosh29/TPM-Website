@@ -1,110 +1,131 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CounterBlock from '../components/live/CounterBlock.astro';
+import { homePage } from '../data/pages/home';
 import { site } from '../data/site';
-
-const benefits = [
-  {
-    title: 'Safety and Security',
-    text: 'Staff available 24/7 with secure access and caring support to keep residents safe at all times.',
-  },
-  {
-    title: '24/7 Nursing Staff',
-    text: 'Trained professionals are always on site to provide care, support, and peace of mind day and night in every situation.',
-  },
-  {
-    title: 'Medication',
-    text: 'All medications are safely managed and administered by trained staff, ensuring accuracy and personalized care for each resident.',
-  },
-  {
-    title: 'Community',
-    text: 'Residents enjoy a vibrant, welcoming environment filled with social activities, meaningful connections, and a true sense of belonging.',
-  },
-  {
-    title: 'Peaceful Living',
-    text: 'Enjoy a quiet lifestyle close to nature on Lake Huron, where serenity and comfort are part of everyday life.',
-  },
-];
 ---
 
-<BaseLayout
-  title={site.name}
-  description="Retirement living in Tiverton, Ontario — warm community, 24/7 care, and lakeshore setting."
->
-  <section class="relative overflow-hidden bg-tpm-navy text-white">
-    <div class="absolute inset-0 bg-gradient-to-br from-tpm-navy via-tpm-navy-dark to-tpm-teal/40" />
-    <div class="relative mx-auto max-w-6xl px-4 py-16 md:py-24">
-      <p class="text-tpm-teal-light text-sm font-semibold uppercase tracking-wider">Tiverton, Ontario</p>
-      <h1 class="mt-2 max-w-2xl font-serif text-4xl font-bold leading-tight md:text-5xl">
-        Retirement Living at its Best!
-      </h1>
-      <p class="mt-6 max-w-2xl text-lg text-slate-200">
-        Nestled by the shores of Lake Huron in historic Tiverton, {site.name} is a warm, vibrant
-        residence where every day is filled with friendship, engaging activities, and the comforts of home.
-      </p>
-      <div class="mt-10 flex flex-wrap gap-4">
-        <a
-          href="/schedule-a-tour"
-          class="rounded-lg bg-tpm-teal px-6 py-3 font-semibold text-white hover:bg-white hover:text-tpm-navy"
-        >
-          Schedule a Tour
-        </a>
-        <a
-          href={`tel:${site.phoneTel}`}
-          class="rounded-lg border border-white/40 px-6 py-3 font-semibold hover:bg-white/10"
-        >
-          {site.phone}
-        </a>
+<BaseLayout title={homePage.metaTitle} description={homePage.lakeshoreIntro}>
+  <section class="border-b border-black/10 bg-white">
+    <div class="eldcare-section grid gap-10 lg:grid-cols-2 lg:items-center">
+      <div class="space-y-6">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-tpm-green">{homePage.preHeadline}</p>
+        <h2 class="text-3xl font-bold leading-tight text-tpm-ink md:text-5xl">
+          {homePage.journeyHeadline.before}
+          <span class="eldcare-highlight">{homePage.journeyHeadline.highlight}</span>
+          {homePage.journeyHeadline.after}
+        </h2>
+        <p class="text-lg font-semibold text-tpm-ink">{homePage.settleIn}</p>
+        <p class="text-tpm-muted">{homePage.reachOut}</p>
+        <div class="flex flex-wrap items-center gap-6">
+          <a href={`tel:${site.phoneTel}`} class="text-2xl font-bold text-tpm-green">{site.phone}</a>
+          <a href={`mailto:${site.email}`} class="font-semibold text-tpm-green hover:underline">Email us</a>
+        </div>
       </div>
-      <p class="mt-12 text-center md:text-left">
-        <span class="font-serif text-5xl font-bold text-tpm-teal-light">{site.yearsOfTrustedCare}+</span>
-        <span class="ml-2 text-xl">years of trusted care for seniors</span>
-      </p>
+      <img
+        src={homePage.leadership.heroImage}
+        alt=""
+        class="w-full rounded-2xl object-cover shadow-lg"
+        loading="eager"
+      />
     </div>
   </section>
 
-  <section class="mx-auto max-w-6xl px-4 py-16">
-    <h2 class="text-center font-serif text-3xl text-tpm-navy">Caring for you, like family.</h2>
-    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  <section class="eldcare-section">
+    <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+      <img
+        src="https://tivertonparkmanor.com/wp-content/uploads/2025/04/h1-vector.webp"
+        alt=""
+        class="mx-auto max-w-xs"
+        loading="lazy"
+      />
+      <div class="space-y-6">
+        <p class="text-sm font-semibold uppercase text-tpm-muted">{homePage.welcomeTag}</p>
+        <h2 class="text-3xl font-bold md:text-4xl">
+          {homePage.bestHeadline.before}
+          <span class="eldcare-highlight">{homePage.bestHeadline.highlight}</span>
+        </h2>
+        <p class="text-lg text-tpm-muted">{homePage.lakeshoreIntro}</p>
+        <CounterBlock
+          display={homePage.yearsStat.display}
+          suffix={homePage.yearsStat.suffix}
+          title={homePage.yearsStat.label}
+        />
+        <p class="whitespace-pre-line text-tpm-muted">{homePage.tourCta}</p>
+        <a href="/schedule-a-tour/" class="eldcare-btn">Schedule a tour</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-black/10 bg-white py-12">
+    <div class="eldcare-section">
+      <p class="text-sm font-semibold uppercase text-tpm-muted">{homePage.whyUs}</p>
+      <h2 class="mt-2 text-3xl font-bold md:text-4xl">
+        {homePage.caringHeadline.before}
+        <span class="eldcare-highlight">{homePage.caringHeadline.highlight}</span>
+      </h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          homePage.benefits.map((b) => (
+            <article class="eldcare-feature-card">
+              <h3 class="font-semibold text-tpm-green">{b.title}</h3>
+              <p class="mt-2 text-sm text-tpm-muted">{b.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="eldcare-section">
+    <p class="text-sm font-semibold uppercase text-tpm-muted">{homePage.explore}</p>
+    <h2 class="mt-2 max-w-3xl text-3xl font-bold md:text-4xl">
+      {homePage.memoriesHeadline.plain}
+      <span class="eldcare-highlight">{homePage.memoriesHeadline.highlight}</span>
+    </h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div class="rounded-2xl bg-tpm-green p-8 text-white">
+        <h3 class="text-2xl font-bold">{homePage.feelAtHome}</h3>
+        <a href="/living-options/" class="eldcare-btn mt-6 bg-white text-tpm-green hover:bg-tpm-cream">
+          {homePage.discoverPlaceCta}
+        </a>
+      </div>
       {
-        benefits.map((b) => (
-          <article class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-            <h3 class="font-semibold text-tpm-teal">{b.title}</h3>
-            <p class="mt-2 text-slate-600">{b.text}</p>
-          </article>
+        homePage.counters.map((c) => (
+          <div class="eldcare-feature-card">
+            <CounterBlock display={c.display} suffix={c.suffix} title={c.title} />
+          </div>
         ))
       }
     </div>
   </section>
 
-  <section class="bg-white py-16">
-    <div class="mx-auto max-w-6xl px-4 text-center">
-      <h2 class="font-serif text-3xl text-tpm-navy">Feel at Home, Every Day</h2>
-      <div class="mt-8 flex flex-wrap justify-center gap-4">
-        <a href="/living-options" class="rounded-lg bg-tpm-navy px-6 py-3 text-white hover:bg-tpm-teal">
-          Living Options Designed for You
-        </a>
-        <a href="/lifestyle" class="rounded-lg border-2 border-tpm-teal px-6 py-3 text-tpm-teal hover:bg-tpm-teal/10">
-          Lives Enriched Daily
-        </a>
+  <section class="border-t border-black/10 bg-white">
+    <div class="eldcare-section grid gap-10 lg:grid-cols-2 lg:items-center">
+      <div>
+        <h2 class="text-3xl font-bold">{homePage.leadership.heading}</h2>
+        <p class="mt-1 text-tpm-muted">{homePage.leadership.sub}</p>
+        <a href="/our-team/" class="eldcare-btn mt-6">{homePage.leadership.cta}</a>
       </div>
+      <img
+        src={homePage.leadership.buildingImage}
+        alt=""
+        class="mx-auto max-h-[420px] rounded-2xl object-cover"
+        loading="lazy"
+      />
     </div>
-  </section>
-
-  <section class="mx-auto max-w-6xl px-4 py-16">
-    <h2 class="text-center font-serif text-3xl text-tpm-navy">The People Behind the Purpose</h2>
-    <p class="mt-2 text-center text-slate-600">Executive Leadership Team</p>
-    <div class="mt-10 grid gap-8 md:grid-cols-2">
-      <article class="rounded-xl bg-slate-50 p-8 text-center">
-        <h3 class="text-xl font-semibold text-tpm-navy">Duncan Hamann</h3>
-        <p class="text-tpm-teal">Owner and General Manager</p>
-      </article>
-      <article class="rounded-xl bg-slate-50 p-8 text-center">
-        <h3 class="text-xl font-semibold text-tpm-navy">Lori Fredericks</h3>
-        <p class="text-tpm-teal">Owner and Director of Care</p>
-      </article>
+    <div class="eldcare-section grid gap-6 pb-16 md:grid-cols-2">
+      {
+        homePage.leadership.members.map((m) => (
+          <article class="overflow-hidden rounded-2xl bg-tpm-cream text-center shadow-sm">
+            <img src={m.image} alt="" class="h-72 w-full object-cover" loading="lazy" />
+            <div class="p-6">
+              <h3 class="text-xl font-bold">{m.name}</h3>
+              <p class="text-tpm-green">{m.role}</p>
+            </div>
+          </article>
+        ))
+      }
     </div>
-    <p class="mt-8 text-center">
-      <a href="/team" class="font-semibold text-tpm-teal hover:underline">Meet our full team →</a>
-    </p>
   </section>
 </BaseLayout>

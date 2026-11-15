@@ -1,48 +1,67 @@
 ---
-import { navLinks, site } from '../data/site';
+import { mainNav, site } from '../data/site';
 
-const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur">
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-  <a href="/" class="flex flex-col leading-tight">
-      <span class="font-serif text-lg font-bold text-tpm-navy md:text-xl">{site.name}</span>
-      <span class="hidden text-xs text-slate-500 sm:block">{site.tagline}</span>
+<header class="sticky top-0 z-50 border-b border-black/10 bg-white/95 backdrop-blur">
+  <div class="mx-auto flex max-w-[1410px] items-center justify-between gap-4 px-4 py-3">
+    <a href="/" class="flex items-center gap-3">
+      <img src={site.logoUrl} alt="Tiverton Park Manor" class="h-12 w-auto md:h-14" width="160" height="56" />
     </a>
 
-    <nav class="hidden items-center gap-1 lg:flex" aria-label="Main">
+    <nav class="hidden items-center gap-6 lg:flex" aria-label="Main">
       {
-        navLinks.map((link) => {
-          const href = link.href.replace(/\/$/, '') || '/';
-          const active = currentPath === href;
-          return (
+        mainNav.map((link) =>
+          'children' in link && link.children ? (
+            <div class="group relative">
+              <a
+                href={link.href}
+                class:list={[
+                  'text-sm font-medium text-tpm-ink hover:text-tpm-green',
+                  currentPath.startsWith('/living-options') && 'text-tpm-green',
+                ]}
+              >
+                {link.label}
+              </a>
+              <div class="invisible absolute left-0 top-full z-50 min-w-48 pt-2 opacity-0 transition group-hover:visible group-hover:opacity-100">
+                <ul class="rounded-xl border border-black/10 bg-white py-2 shadow-lg">
+                  {
+                    link.children.map((child) => (
+                      <li>
+                        <a
+                          href={child.href}
+                          class="block px-4 py-2 text-sm text-tpm-ink hover:bg-tpm-cream"
+                        >
+                          {child.label}
+                        </a>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </div>
+          ) : (
             <a
               href={link.href}
               class:list={[
-                'rounded-md px-2 py-1 text-sm font-medium transition',
-                active ? 'bg-tpm-navy text-white' : 'text-slate-700 hover:bg-slate-100',
-                link.label === 'Schedule a Tour' && !active && 'text-tpm-teal',
+                'text-sm font-medium text-tpm-ink hover:text-tpm-green',
+                currentPath.startsWith(link.href) && 'text-tpm-green',
               ]}
             >
               {link.label}
             </a>
-          );
-        })
+          ),
+        )
       }
     </nav>
 
-    <a
-      href="/schedule-a-tour"
-      class="hidden rounded-lg bg-tpm-teal px-4 py-2 text-sm font-semibold text-white hover:bg-tpm-navy sm:inline-block"
-    >
-      Schedule a Tour
-    </a>
+    <a href="/schedule-a-tour/" class="eldcare-btn hidden sm:inline-flex">Schedule a Tour</a>
 
     <button
       type="button"
       id="mobile-menu-btn"
-      class="inline-flex items-center rounded-lg border border-slate-300 p-2 lg:hidden"
+      class="inline-flex items-center rounded-lg border border-black/15 p-2 lg:hidden"
       aria-expanded="false"
       aria-controls="mobile-menu"
     >
@@ -53,15 +72,20 @@ const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
     </button>
   </div>
 
-  <div id="mobile-menu" class="hidden border-t border-slate-200 bg-white lg:hidden">
+  <div id="mobile-menu" class="hidden border-t border-black/10 bg-white lg:hidden">
     <nav class="flex flex-col px-4 py-3" aria-label="Mobile">
       {
-        navLinks.map((link) => (
-          <a href={link.href} class="border-b border-slate-100 py-3 text-sm font-medium text-slate-800">
-            {link.label}
-          </a>
-        ))
+        mainNav.flatMap((link) => {
+          const items = [{ href: link.href, label: link.label }];
+          if ('children' in link && link.children) items.push(...link.children);
+          return items.map((item) => (
+            <a href={item.href} class="border-b border-black/5 py-3 text-sm font-medium">
+              {item.label}
+            </a>
+          ));
+        })
       }
+      <a href="/schedule-a-tour/" class="py-3 text-sm font-semibold text-tpm-green">Schedule a Tour</a>
     </nav>
   </div>
 </header>

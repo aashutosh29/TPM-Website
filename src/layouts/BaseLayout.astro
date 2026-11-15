@@ -17,7 +17,7 @@ const {
   showContactStrip = true,
 } = Astro.props;
 
-const pageTitle = title === site.name ? title : `${title} | ${site.name}`;
+const pageTitle = title.includes('Tiverton Park Manor') ? title : `${title} | ${site.name}`;
 ---
 
 <!doctype html>
@@ -30,25 +30,10 @@ const pageTitle = title === site.name ? title : `${title} | ${site.name}`;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap"
       rel="stylesheet"
     />
     <title>{pageTitle}</title>
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org',
-      '@type': 'LocalBusiness',
-      name: site.name,
-      telephone: site.phone,
-      email: site.email,
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: site.address.street,
-        addressLocality: site.address.city,
-        addressRegion: site.address.province,
-        postalCode: site.address.postal,
-        addressCountry: site.address.country,
-      },
-    })} />
   </head>
   <body class="flex min-h-screen flex-col">
     <Header />

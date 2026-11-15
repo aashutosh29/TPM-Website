@@ -1,0 +1,18 @@
+---
+interface Props {
+  display: string;
+  suffix?: string;
+  title: string;
+  class?: string;
+}
+
+const { display, suffix = '+', title, class: className = '' } = Astro.props;
+---
+
+<div class:list={['text-center', className]}>
+  <div class="eldcare-counter">
+    {display}
+    <span>{suffix}</span>
+  </div>
+  <p class="mt-2 text-sm font-medium text-tpm-ink md:text-base">{title}</p>
+</div>

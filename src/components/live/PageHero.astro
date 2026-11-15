@@ -1,0 +1,19 @@
+---
+interface Props {
+  title: string;
+  breadcrumb?: string;
+}
+
+const { title, breadcrumb = title } = Astro.props;
+---
+
+<div class="eldcare-page-hero">
+  <div class="eldcare-section pb-6 pt-8">
+    <nav class="mb-4 text-sm text-tpm-muted" aria-label="Breadcrumb">
+      <a href="/" class="hover:text-tpm-green">Home</a>
+      <span class="mx-2">/</span>
+      <span>{breadcrumb}</span>
+    </nav>
+    <h1 class="text-4xl font-bold text-tpm-ink md:text-5xl">{title}</h1>
+  </div>
+</div>
