@@ -11,8 +11,14 @@ import { site } from '../data/site';
     <p class="text-sm font-semibold uppercase text-tpm-muted">{livingOptionsPage.tag}</p>
     <p class="mt-2 max-w-3xl text-lg text-tpm-muted">{livingOptionsPage.intro}</p>
     <div class="mt-10 space-y-10">
-      {livingOptionsPage.suites.map((suite) => (
-        <article class="grid gap-6 rounded-2xl border border-black/10 bg-white p-6 lg:grid-cols-2">
+      {livingOptionsPage.suites.map((suite) => {
+        const id = suite.name
+          .toLowerCase()
+          .replace(/[’']/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/[^a-z0-9-]/g, '');
+        return (
+        <article id={id} class="scroll-mt-24 grid gap-6 rounded-2xl border border-black/10 bg-white p-6 lg:grid-cols-2">
           <img src={suite.image} alt="" class="h-72 w-full rounded-xl object-cover" loading="lazy" />
           <div>
             <p class="text-sm font-semibold text-tpm-green">{suite.tag}</p>
@@ -21,7 +27,8 @@ import { site } from '../data/site';
             <span class="mt-4 inline-block text-sm font-semibold text-tpm-green">{suite.cta}</span>
           </div>
         </article>
-      ))}
+        );
+      })}
     </div>
   </section>
   <section class="border-t border-black/10 bg-tpm-green/5 py-14 text-center">

@@ -4,7 +4,7 @@ import PageHero from '../components/live/PageHero.astro';
 import { lifestylePage } from '../data/pages/lifestyle';
 ---
 
-<BaseLayout title={lifestylePage.metaTitle}>
+<BaseLayout title={lifestylePage.metaTitle} description={lifestylePage.description}>
   <PageHero title={lifestylePage.h1} />
   <section class="eldcare-section text-center">
     <p class="text-sm font-semibold uppercase text-tpm-muted">{lifestylePage.journey}</p>

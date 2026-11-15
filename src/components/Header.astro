@@ -46,7 +46,8 @@ const currentPath = Astro.url.pathname;
               href={link.href}
               class:list={[
                 'text-sm font-medium text-tpm-ink hover:text-tpm-green',
-                currentPath.startsWith(link.href) && 'text-tpm-green',
+                (link.href === '/' ? currentPath === '/' : currentPath.startsWith(link.href)) &&
+                  'text-tpm-green',
               ]}
             >
               {link.label}
@@ -66,7 +67,7 @@ const currentPath = Astro.url.pathname;
       aria-controls="mobile-menu"
     >
       <span class="sr-only">Open menu</span>
-      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </button>
@@ -79,22 +80,42 @@ const currentPath = Astro.url.pathname;
           const items = [{ href: link.href, label: link.label }];
           if ('children' in link && link.children) items.push(...link.children);
           return items.map((item) => (
-            <a href={item.href} class="border-b border-black/5 py-3 text-sm font-medium">
+            <a href={item.href} class="mobile-nav-link border-b border-black/5 py-3 text-sm font-medium">
               {item.label}
             </a>
           ));
         })
       }
-      <a href="/schedule-a-tour/" class="py-3 text-sm font-semibold text-tpm-green">Schedule a Tour</a>
+      <a href="/schedule-a-tour/" class="mobile-nav-link py-3 text-sm font-semibold text-tpm-green">
+        Schedule a Tour
+      </a>
     </nav>
   </div>
 </header>
 
-<script>
-  const btn = document.getElementById('mobile-menu-btn');
-  const menu = document.getElementById('mobile-menu');
-  btn?.addEventListener('click', () => {
-    const open = menu?.classList.toggle('hidden') === false;
-    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
+<script is:inline>
+  (function () {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    if (!btn || !menu) return;
+
+    function setOpen(open) {
+      if (open) {
+        menu.classList.remove('hidden');
+        btn.setAttribute('aria-expanded', 'true');
+      } else {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    btn.addEventListener('click', () => {
+      const isHidden = menu.classList.contains('hidden');
+      setOpen(isHidden);
+    });
+
+    menu.querySelectorAll('.mobile-nav-link').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+  })();
 </script>

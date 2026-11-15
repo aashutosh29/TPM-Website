@@ -55,7 +55,7 @@ export const livingOptionsPage = {
     tag: 'get started',
     title: 'Discover the right living option for you',
     sub: 'Reach out to us by phone or email for any inquiries',
-    phone: '(519) 368-8800',
+    phone: '519-368-8800',
     emailLabel: 'Email Us',
   },
 } as const;

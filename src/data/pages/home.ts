@@ -1,7 +1,9 @@
 /** Homepage copy extracted from live Elementor (2026-11-15). */
 export const homePage = {
-  metaTitle: 'Tiverton Park Manor - Tiverton Park Manor',
-  h1: 'Retirement Living at its Best !',
+  metaTitle: 'Retirement Home in Tiverton, ON',
+  description:
+    'Retirement living on Lake Huron — 24/7 care, welcoming suites, and a vibrant community at Tiverton Park Manor.',
+  h1: 'Retirement living at its best',
   preHeadline: 'SENIOR LIVING REIMAGINED',
   journeyHeadline: {
     before: 'Starting the ',
@@ -13,15 +15,13 @@ export const homePage = {
   welcomeTag: 'welcome',
   bestHeadline: {
     before: 'Retirement Living at its ',
-    highlight: 'Best !',
+    highlight: 'Best!',
   },
   lakeshoreIntro:
     'Nestled by the shores of Lake Huron in historic Tiverton, Tiverton Park Manor is a warm, vibrant community where every day is filled with friendship, engaging activities, and the comforts of home.',
   yearsStat: {
-    display: '0',
     suffix: '+',
     label: 'years of trusted care for seniors.',
-    diviTarget: 22,
   },
   tourCta:
     'Ready to see for yourself?\nSchedule a tour for you or your loved one today',
@@ -60,9 +60,9 @@ export const homePage = {
   feelAtHome: 'Feel at Home, Every Day',
   discoverPlaceCta: 'Discover Your Place',
   counters: [
-    { display: '0', suffix: '+', title: 'Living Options Designed for You' },
-    { display: '0', suffix: '+', title: 'Lives Enriched Daily' },
-    { display: '0', suffix: '+', title: 'Home Care Providers' },
+    { display: '5', suffix: '+', title: 'Living Options Designed for You' },
+    { display: '24', suffix: '/7', title: 'Nursing & Care Team On Site' },
+    { display: '1', suffix: '', title: 'Lake Huron Residence' },
   ],
   leadership: {
     heading: 'The People Behind the Purpose',

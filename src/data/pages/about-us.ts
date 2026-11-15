@@ -68,7 +68,7 @@ export const aboutPage = {
   cta: {
     title: 'Discover the space that feels like home',
     sub: 'We’re just a call or email away to answer your questions.',
-    phone: '(519) 368-8800',
+    phone: '519-368-8800',
     emailLabel: 'Email Us',
   },
 } as const;

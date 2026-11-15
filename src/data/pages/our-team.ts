@@ -1,5 +1,6 @@
 export const teamPage = {
-  metaTitle: 'Our Team - Tiverton Park Manor',
+  metaTitle: 'Our Team',
+  description: 'Meet the executive leadership team at Tiverton Park Manor.',
   h1: 'Our Team',
   tag: 'our team',
   sub: 'Executive Leadership Team',
@@ -7,14 +8,12 @@ export const teamPage = {
     {
       name: 'Duncan Hamann',
       role: 'Owner and General Manager',
-      image:
-        'https://tivertonparkmanor.com/wp-content/uploads/2026/07/Duncan.jpg',
+      image: '/images/Duncan.jpg',
     },
     {
-      name: 'Lori fredericks',
+      name: 'Lori Fredericks',
       role: 'Owner and Director of Care',
-      image:
-        'https://tivertonparkmanor.com/wp-content/uploads/2025/08/Lori-profile-photo-430x482.jpg',
+      image: '/images/Lori-profile-photo.jpg',
     },
   ],
   closing:

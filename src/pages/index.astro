@@ -5,7 +5,8 @@ import { homePage } from '../data/pages/home';
 import { site } from '../data/site';
 ---
 
-<BaseLayout title={homePage.metaTitle} description={homePage.lakeshoreIntro}>
+<BaseLayout title={homePage.metaTitle} description={homePage.description}>
+  <h1 class="sr-only">{homePage.h1}</h1>
   <section class="border-b border-black/10 bg-white">
     <div class="eldcare-section grid gap-10 lg:grid-cols-2 lg:items-center">
       <div class="space-y-6">
@@ -47,7 +48,7 @@ import { site } from '../data/site';
         </h2>
         <p class="text-lg text-tpm-muted">{homePage.lakeshoreIntro}</p>
         <CounterBlock
-          display={homePage.yearsStat.display}
+          display={String(site.yearsOfTrustedCare)}
           suffix={homePage.yearsStat.suffix}
           title={homePage.yearsStat.label}
         />

@@ -4,7 +4,7 @@ import PageHero from '../components/live/PageHero.astro';
 import { teamPage } from '../data/pages/our-team';
 ---
 
-<BaseLayout title={teamPage.metaTitle}>
+<BaseLayout title={teamPage.metaTitle} description={teamPage.description}>
   <PageHero title={teamPage.h1} />
   <section class="eldcare-section text-center">
     <p class="text-sm font-semibold uppercase text-tpm-muted">{teamPage.tag}</p>

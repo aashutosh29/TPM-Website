@@ -1,9 +1,8 @@
-/** Live NAP + branding (matches tivertonparkmanor.com). */
+/** NAP + branding — single source of truth for Phase 2 site. */
 export const site = {
   name: 'Tiverton Park Manor',
   tagline: 'Retirement living on the shores of Lake Huron',
   phone: '519-368-8800',
-  phoneDisplayAlt: '(519) 368-8800',
   phoneTel: '+15193688800',
   email: 'manager@tivertonparkmanor.com',
   address: {
@@ -14,50 +13,56 @@ export const site = {
     country: 'Canada',
     formatted: '24 King St, Tiverton, ON N0G 2T0',
   },
-  /** Live DOM initial counter (before JS); Divi data-to-value=22 */
-  yearsCounterLive: 0,
-  yearsCounterDiviTarget: 22,
+  /**
+   * Years of trusted care shown on the homepage (static; no JS counter).
+   * Confirm opening year with ownership if this figure should change.
+   */
+  yearsOfTrustedCare: 42,
+  mapEmbedSrc:
+    'https://maps.google.com/maps?q=24%20King%20St%2C%20Tiverton%2C%20ON%20N0G%202T0&z=15&output=embed',
   logoUrl:
     'https://tivertonparkmanor.com/wp-content/uploads/2025/04/bg-removed-logo.png',
   url: 'https://tivertonparkmanor.com',
 } as const;
 
 export const mainNav = [
-  { href: '/services/', label: 'Services', external: true, liveOnly: true },
   {
     href: '/living-options/',
     label: 'Living Options',
     children: [
-      { href: '/living-options/', label: 'Studio' },
-      { href: '/livings/private-suite/', label: 'Private Suite', liveOnly: true },
-      { href: '/livings/standard-single/', label: 'Standard Single', liveOnly: true },
-      { href: '/livings/2-room-suite/', label: '2- Room Suite', liveOnly: true },
-      { href: '/livings/couples-suite/', label: 'Couple’s Suite', liveOnly: true },
+      { href: '/living-options/#studio', label: 'Studio' },
+      { href: '/living-options/#standard-single', label: 'Standard Single' },
+      { href: '/living-options/#private-suite', label: 'Private Suite' },
+      { href: '/living-options/#2-room-suite', label: '2-Room Suite' },
+      { href: '/living-options/#couples-suite', label: "Couple's Suite" },
     ],
   },
+  { href: '/lifestyle/', label: 'Lifestyle' },
   { href: '/about-us/', label: 'About Us' },
   { href: '/our-team/', label: 'Our Team' },
   { href: '/faqs-page/', label: 'FAQ' },
 ] as const;
 
 export const footerAbout = [
-  { href: '/services/', label: 'Services' },
+  { href: '/about-us/', label: 'About Us' },
   { href: '/our-team/', label: 'Our Team' },
-  { href: '/schedule-a-tour/', label: 'Scheldule a Tour' },
-  { href: '/about-us/', label: 'about us' },
+  { href: '/schedule-a-tour/', label: 'Schedule a Tour' },
+  { href: '/contact/', label: 'Contact' },
 ] as const;
 
 export const footerAccommodation = [
-  { href: '/livings/standard-single/', label: 'Standard Single' },
-  { href: '/livings/studio/', label: 'Studio' },
-  { href: '/livings/private-suite/', label: 'Private Suite' },
-  { href: '/livings/couples-suite/', label: "Couple's Suite" },
-  { href: '/livings/2-room-suite/', label: '2-room Suite' },
+  { href: '/living-options/#standard-single', label: 'Standard Single' },
+  { href: '/living-options/#studio', label: 'Studio' },
+  { href: '/living-options/#private-suite', label: 'Private Suite' },
+  { href: '/living-options/#couples-suite', label: "Couple's Suite" },
+  { href: '/living-options/#2-room-suite', label: '2-Room Suite' },
 ] as const;
 
 export const footerQuickLinks = [
   { href: '/lifestyle/', label: 'Lifestyle' },
-  { href: '#', label: 'Policy' },
+  { href: '/faqs-page/', label: 'FAQ' },
+  { href: '/family-portal/', label: 'Family Portal' },
+  { href: '/privacy-policy/', label: 'Privacy Policy' },
 ] as const;
 
 export const socialLinks = [

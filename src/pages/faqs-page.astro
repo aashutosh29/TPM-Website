@@ -4,8 +4,8 @@ import PageHero from '../components/live/PageHero.astro';
 import { faqsPage } from '../data/pages/faqs-page';
 ---
 
-<BaseLayout title={faqsPage.metaTitle}>
-  <PageHero title={faqsPage.h1} breadcrumb="FAQs Page" />
+<BaseLayout title={faqsPage.metaTitle} description={faqsPage.description}>
+  <PageHero title={faqsPage.h1} breadcrumb="FAQ" />
   <section class="eldcare-section max-w-3xl">
     <p class="text-sm font-semibold uppercase text-tpm-muted">{faqsPage.eyebrow}</p>
     <h2 class="mt-2 text-3xl font-bold">{faqsPage.heading}</h2>

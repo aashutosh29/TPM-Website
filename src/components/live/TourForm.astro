@@ -75,7 +75,7 @@ import { scheduleTourPage } from '../../data/pages/schedule-a-tour';
       message: [
         `Preferred time: ${fd.get('select_time')}`,
         `Touring with: ${audience}`,
-        `Interest (live value): ${fd.get('living_options')}`,
+        `Interested in: ${fd.get('living_options')}`,
         String(fd.get('message') ?? ''),
       ]
         .filter(Boolean)
