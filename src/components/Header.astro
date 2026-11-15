@@ -1,0 +1,76 @@
+---
+import { navLinks, site } from '../data/site';
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur">
+  <div class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+  <a href="/" class="flex flex-col leading-tight">
+      <span class="font-serif text-lg font-bold text-tpm-navy md:text-xl">{site.name}</span>
+      <span class="hidden text-xs text-slate-500 sm:block">{site.tagline}</span>
+    </a>
+
+    <nav class="hidden items-center gap-1 lg:flex" aria-label="Main">
+      {
+        navLinks.map((link) => {
+          const href = link.href.replace(/\/$/, '') || '/';
+          const active = currentPath === href;
+          return (
+            <a
+              href={link.href}
+              class:list={[
+                'rounded-md px-2 py-1 text-sm font-medium transition',
+                active ? 'bg-tpm-navy text-white' : 'text-slate-700 hover:bg-slate-100',
+                link.label === 'Schedule a Tour' && !active && 'text-tpm-teal',
+              ]}
+            >
+              {link.label}
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <a
+      href="/schedule-a-tour"
+      class="hidden rounded-lg bg-tpm-teal px-4 py-2 text-sm font-semibold text-white hover:bg-tpm-navy sm:inline-block"
+    >
+      Schedule a Tour
+    </a>
+
+    <button
+      type="button"
+      id="mobile-menu-btn"
+      class="inline-flex items-center rounded-lg border border-slate-300 p-2 lg:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="sr-only">Open menu</span>
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-slate-200 bg-white lg:hidden">
+    <nav class="flex flex-col px-4 py-3" aria-label="Mobile">
+      {
+        navLinks.map((link) => (
+          <a href={link.href} class="border-b border-slate-100 py-3 text-sm font-medium text-slate-800">
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+</script>
