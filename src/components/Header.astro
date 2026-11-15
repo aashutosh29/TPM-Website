@@ -1,0 +1,121 @@
+---
+import { mainNav, site } from '../data/site';
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 border-b border-black/10 bg-white/95 backdrop-blur">
+  <div class="mx-auto flex max-w-[1410px] items-center justify-between gap-4 px-4 py-3">
+    <a href="/" class="flex items-center gap-3">
+      <img src={site.logoUrl} alt="Tiverton Park Manor" class="h-12 w-auto md:h-14" width="160" height="56" />
+    </a>
+
+    <nav class="hidden items-center gap-6 lg:flex" aria-label="Main">
+      {
+        mainNav.map((link) =>
+          'children' in link && link.children ? (
+            <div class="group relative">
+              <a
+                href={link.href}
+                class:list={[
+                  'text-sm font-medium text-tpm-ink hover:text-tpm-green',
+                  currentPath.startsWith('/living-options') && 'text-tpm-green',
+                ]}
+              >
+                {link.label}
+              </a>
+              <div class="invisible absolute left-0 top-full z-50 min-w-48 pt-2 opacity-0 transition group-hover:visible group-hover:opacity-100">
+                <ul class="rounded-xl border border-black/10 bg-white py-2 shadow-lg">
+                  {
+                    link.children.map((child) => (
+                      <li>
+                        <a
+                          href={child.href}
+                          class="block px-4 py-2 text-sm text-tpm-ink hover:bg-tpm-cream"
+                        >
+                          {child.label}
+                        </a>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </div>
+          ) : (
+            <a
+              href={link.href}
+              class:list={[
+                'text-sm font-medium text-tpm-ink hover:text-tpm-green',
+                (link.href === '/' ? currentPath === '/' : currentPath.startsWith(link.href)) &&
+                  'text-tpm-green',
+              ]}
+            >
+              {link.label}
+            </a>
+          ),
+        )
+      }
+    </nav>
+
+    <a href="/schedule-a-tour/" class="eldcare-btn hidden sm:inline-flex">Schedule a Tour</a>
+
+    <button
+      type="button"
+      id="mobile-menu-btn"
+      class="inline-flex items-center rounded-lg border border-black/15 p-2 lg:hidden"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <span class="sr-only">Open menu</span>
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-black/10 bg-white lg:hidden">
+    <nav class="flex flex-col px-4 py-3" aria-label="Mobile">
+      {
+        mainNav.flatMap((link) => {
+          const items = [{ href: link.href, label: link.label }];
+          if ('children' in link && link.children) items.push(...link.children);
+          return items.map((item) => (
+            <a href={item.href} class="mobile-nav-link border-b border-black/5 py-3 text-sm font-medium">
+              {item.label}
+            </a>
+          ));
+        })
+      }
+      <a href="/schedule-a-tour/" class="mobile-nav-link py-3 text-sm font-semibold text-tpm-green">
+        Schedule a Tour
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    if (!btn || !menu) return;
+
+    function setOpen(open) {
+      if (open) {
+        menu.classList.remove('hidden');
+        btn.setAttribute('aria-expanded', 'true');
+      } else {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    btn.addEventListener('click', () => {
+      const isHidden = menu.classList.contains('hidden');
+      setOpen(isHidden);
+    });
+
+    menu.querySelectorAll('.mobile-nav-link').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+  })();
+</script>

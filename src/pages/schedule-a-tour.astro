@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/live/PageHero.astro';
+import TourForm from '../components/live/TourForm.astro';
+import { scheduleTourPage } from '../data/pages/schedule-a-tour';
+---
+
+<BaseLayout title={scheduleTourPage.metaTitle}>
+  <PageHero title={scheduleTourPage.h1} breadcrumb="Schedule A Tour" />
+  <section class="eldcare-section grid gap-10 lg:grid-cols-2">
+    <div>
+      <h2 class="text-3xl font-bold">{scheduleTourPage.heading}</h2>
+      <p class="mt-4 text-tpm-muted">{scheduleTourPage.intro}</p>
+      <img
+        src={scheduleTourPage.heroImage}
+        alt=""
+        class="mt-6 rounded-2xl object-cover shadow-md"
+        loading="lazy"
+      />
+    </div>
+    <TourForm />
+  </section>
+</BaseLayout>

@@ -1,0 +1,134 @@
+---
+export interface Field {
+  name: string;
+  label: string;
+  type?: 'text' | 'email' | 'tel' | 'date' | 'textarea';
+  required?: boolean;
+  rows?: number;
+}
+
+interface Props {
+  endpoint: '/api/contact/' | '/api/tour/';
+  fields: Field[];
+  submitLabel: string;
+  intro?: string;
+  formId: string;
+}
+
+const { endpoint, fields, submitLabel, intro, formId } = Astro.props;
+---
+
+<div class="lead-form w-full max-w-xl">
+  {intro && <p class="mb-6 text-slate-600">{intro}</p>}
+  <form id={formId} class="space-y-4" novalidate>
+    {
+      fields.map((field) => (
+        <div>
+          <label for={`${formId}-${field.name}`} class="mb-1 block text-sm font-medium text-tpm-navy">
+            {field.label}
+            {field.required !== false && <span class="text-red-600"> *</span>}
+          </label>
+          {field.type === 'textarea' ? (
+            <textarea
+              id={`${formId}-${field.name}`}
+              name={field.name}
+              rows={field.rows ?? 4}
+              required={field.required !== false}
+              class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-tpm-teal focus:outline-none focus:ring-2 focus:ring-tpm-teal/30"
+            />
+          ) : (
+            <input
+              id={`${formId}-${field.name}`}
+              name={field.name}
+              type={field.type ?? 'text'}
+              required={field.required !== false}
+              class="w-full rounded-lg border border-slate-300 px-3 py-2 focus:border-tpm-teal focus:outline-none focus:ring-2 focus:ring-tpm-teal/30"
+            />
+          )}
+          <p class="field-error mt-1 hidden text-sm text-red-600" data-for={field.name} />
+        </div>
+      ))
+    }
+    <button
+      type="submit"
+      class="submit-btn w-full rounded-lg bg-tpm-teal px-6 py-3 font-semibold text-white transition hover:bg-tpm-navy disabled:opacity-60 sm:w-auto"
+    >
+      {submitLabel}
+    </button>
+  </form>
+  <p class="form-feedback mt-4 hidden rounded-lg p-4 text-sm" role="status" />
+</div>
+
+<script define:vars={{ endpoint, formId, fields }}>
+  const form = document.getElementById(formId);
+  if (!form) throw new Error('Form not found');
+
+  const feedbackEl = form.parentElement?.querySelector('.form-feedback');
+  const submitBtn = form.querySelector('.submit-btn');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    feedbackEl?.classList.add('hidden');
+    form.querySelectorAll('.field-error').forEach((el) => {
+      el.classList.add('hidden');
+      el.textContent = '';
+    });
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+    }
+
+    const payload = {};
+    for (const f of fields) {
+      const input = form.elements.namedItem(f.name);
+      payload[f.name] =
+        input && 'value' in input ? String(input.value).trim() : '';
+    }
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const json = await res.json();
+
+      if (!res.ok || !json.ok) {
+        if (json.errors && feedbackEl) {
+          for (const [key, msg] of Object.entries(json.errors)) {
+            const err = form.parentElement?.querySelector(`[data-for="${key}"]`);
+            if (err) {
+              err.textContent = msg;
+              err.classList.remove('hidden');
+            }
+          }
+        }
+        showFeedback(json.message ?? 'Please try again or call 519-368-8800.', false);
+        return;
+      }
+
+      form.reset();
+      showFeedback(
+        json.message ?? 'Thank you. We will be in touch soon.',
+        true,
+      );
+    } catch {
+      showFeedback('Network error. Please call 519-368-8800.', false);
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = submitBtn.dataset.label ?? submitBtn.textContent;
+      }
+    }
+  });
+
+  if (submitBtn) submitBtn.dataset.label = submitBtn.textContent ?? '';
+
+  function showFeedback(text, success) {
+    if (!feedbackEl) return;
+    feedbackEl.textContent = text;
+    feedbackEl.classList.remove('hidden', 'bg-green-50', 'text-green-800', 'bg-red-50', 'text-red-800');
+    feedbackEl.classList.add(success ? 'bg-green-50 text-green-800' : 'bg-red-50 text-red-800');
+  }
+</script>

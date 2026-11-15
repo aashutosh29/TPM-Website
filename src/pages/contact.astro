@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/live/PageHero.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { contactPage } from '../data/pages/contact';
+import { site } from '../data/site';
+
+const contactFields = [
+  { name: 'name', label: 'Name', type: 'text' as const, required: true },
+  { name: 'email', label: 'Email', type: 'email' as const, required: true },
+  { name: 'phone', label: 'Phone', type: 'tel' as const, required: false },
+  { name: 'message', label: 'Message', type: 'textarea' as const, required: true, rows: 5 },
+];
+---
+
+<BaseLayout title={contactPage.metaTitle} description={contactPage.description}>
+  <PageHero title={contactPage.h1} />
+  <section class="eldcare-section grid gap-10 lg:grid-cols-2">
+    <div>
+      <h2 class="text-2xl font-bold">{contactPage.heading}</h2>
+      <p class="mt-4 text-tpm-muted">{contactPage.intro}</p>
+      <ul class="mt-6 space-y-2 text-sm text-tpm-muted">
+        <li>
+          <strong class="text-tpm-ink">Phone:</strong>{' '}
+          <a href={`tel:${site.phoneTel}`} class="text-tpm-green hover:underline">{site.phone}</a>
+        </li>
+        <li>
+          <strong class="text-tpm-ink">Email:</strong>{' '}
+          <a href={`mailto:${site.email}`} class="text-tpm-green hover:underline">{site.email}</a>
+        </li>
+        <li>
+          <strong class="text-tpm-ink">Address:</strong> {site.address.formatted}
+        </li>
+      </ul>
+      <div class="mt-8 overflow-hidden rounded-2xl border border-black/10 shadow-sm">
+        <iframe
+          title="Map — Tiverton Park Manor"
+          src={site.mapEmbedSrc}
+          width="100%"
+          height="320"
+          style="border:0"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+    <LeadForm
+      formId="contact-form"
+      endpoint="/api/contact/"
+      submitLabel="Send message"
+      fields={contactFields}
+    />
+  </section>
+</BaseLayout>

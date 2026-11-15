@@ -1,0 +1,24 @@
+---
+import { site } from '../data/site';
+---
+
+<section class="border-y border-black/10 bg-white py-10" aria-label="Contact strip">
+  <div class="eldcare-section grid gap-8 md:grid-cols-3">
+    <div>
+      <h4 class="text-base font-semibold text-tpm-ink">Contact us for inquiries.</h4>
+      <a href={`tel:${site.phoneTel}`} class="mt-1 block text-2xl font-bold text-tpm-green">
+        {site.phone}
+      </a>
+    </div>
+    <div>
+      <h4 class="text-base font-semibold text-tpm-ink">Email us</h4>
+      <a href={`mailto:${site.email}`} class="mt-1 block text-lg text-tpm-green hover:underline">
+        {site.email}
+      </a>
+    </div>
+    <div>
+      <h4 class="text-base font-semibold text-tpm-ink">Visit us</h4>
+      <p class="mt-1 text-lg text-tpm-muted">{site.address.formatted}</p>
+    </div>
+  </div>
+</section>

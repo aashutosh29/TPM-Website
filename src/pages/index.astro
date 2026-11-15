@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CounterBlock from '../components/live/CounterBlock.astro';
+import { homePage } from '../data/pages/home';
+import { site } from '../data/site';
+---
+
+<BaseLayout title={homePage.metaTitle} description={homePage.description}>
+  <h1 class="sr-only">{homePage.h1}</h1>
+  <section class="border-b border-black/10 bg-white">
+    <div class="eldcare-section grid gap-10 lg:grid-cols-2 lg:items-center">
+      <div class="space-y-6">
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-tpm-green">{homePage.preHeadline}</p>
+        <h2 class="text-3xl font-bold leading-tight text-tpm-ink md:text-5xl">
+          {homePage.journeyHeadline.before}
+          <span class="eldcare-highlight">{homePage.journeyHeadline.highlight}</span>
+          {homePage.journeyHeadline.after}
+        </h2>
+        <p class="text-lg font-semibold text-tpm-ink">{homePage.settleIn}</p>
+        <p class="text-tpm-muted">{homePage.reachOut}</p>
+        <div class="flex flex-wrap items-center gap-6">
+          <a href={`tel:${site.phoneTel}`} class="text-2xl font-bold text-tpm-green">{site.phone}</a>
+          <a href={`mailto:${site.email}`} class="font-semibold text-tpm-green hover:underline">Email us</a>
+        </div>
+      </div>
+      <img
+        src={homePage.leadership.heroImage}
+        alt=""
+        class="w-full rounded-2xl object-cover shadow-lg"
+        loading="eager"
+      />
+    </div>
+  </section>
+
+  <section class="eldcare-section">
+    <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+      <img
+        src="https://tivertonparkmanor.com/wp-content/uploads/2025/04/h1-vector.webp"
+        alt=""
+        class="mx-auto max-w-xs"
+        loading="lazy"
+      />
+      <div class="space-y-6">
+        <p class="text-sm font-semibold uppercase text-tpm-muted">{homePage.welcomeTag}</p>
+        <h2 class="text-3xl font-bold md:text-4xl">
+          {homePage.bestHeadline.before}
+          <span class="eldcare-highlight">{homePage.bestHeadline.highlight}</span>
+        </h2>
+        <p class="text-lg text-tpm-muted">{homePage.lakeshoreIntro}</p>
+        <CounterBlock
+          display={String(site.yearsOfTrustedCare)}
+          suffix={homePage.yearsStat.suffix}
+          title={homePage.yearsStat.label}
+        />
+        <p class="whitespace-pre-line text-tpm-muted">{homePage.tourCta}</p>
+        <a href="/schedule-a-tour/" class="eldcare-btn">Schedule a tour</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-y border-black/10 bg-white py-12">
+    <div class="eldcare-section">
+      <p class="text-sm font-semibold uppercase text-tpm-muted">{homePage.whyUs}</p>
+      <h2 class="mt-2 text-3xl font-bold md:text-4xl">
+        {homePage.caringHeadline.before}
+        <span class="eldcare-highlight">{homePage.caringHeadline.highlight}</span>
+      </h2>
+      <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          homePage.benefits.map((b) => (
+            <article class="eldcare-feature-card">
+              <h3 class="font-semibold text-tpm-green">{b.title}</h3>
+              <p class="mt-2 text-sm text-tpm-muted">{b.text}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="eldcare-section">
+    <p class="text-sm font-semibold uppercase text-tpm-muted">{homePage.explore}</p>
+    <h2 class="mt-2 max-w-3xl text-3xl font-bold md:text-4xl">
+      {homePage.memoriesHeadline.plain}
+      <span class="eldcare-highlight">{homePage.memoriesHeadline.highlight}</span>
+    </h2>
+    <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div class="rounded-2xl bg-tpm-green p-8 text-white">
+        <h3 class="text-2xl font-bold">{homePage.feelAtHome}</h3>
+        <a href="/living-options/" class="eldcare-btn mt-6 bg-white text-tpm-green hover:bg-tpm-cream">
+          {homePage.discoverPlaceCta}
+        </a>
+      </div>
+      {
+        homePage.counters.map((c) => (
+          <div class="eldcare-feature-card">
+            <CounterBlock display={c.display} suffix={c.suffix} title={c.title} />
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="border-t border-black/10 bg-white">
+    <div class="eldcare-section grid gap-10 lg:grid-cols-2 lg:items-center">
+      <div>
+        <h2 class="text-3xl font-bold">{homePage.leadership.heading}</h2>
+        <p class="mt-1 text-tpm-muted">{homePage.leadership.sub}</p>
+        <a href="/our-team/" class="eldcare-btn mt-6">{homePage.leadership.cta}</a>
+      </div>
+      <img
+        src={homePage.leadership.buildingImage}
+        alt=""
+        class="mx-auto max-h-[420px] rounded-2xl object-cover"
+        loading="lazy"
+      />
+    </div>
+    <div class="eldcare-section grid gap-6 pb-16 md:grid-cols-2">
+      {
+        homePage.leadership.members.map((m) => (
+          <article class="overflow-hidden rounded-2xl bg-tpm-cream text-center shadow-sm">
+            <img src={m.image} alt="" class="h-72 w-full object-cover" loading="lazy" />
+            <div class="p-6">
+              <h3 class="text-xl font-bold">{m.name}</h3>
+              <p class="text-tpm-green">{m.role}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
